@@ -6,10 +6,10 @@ import { and, eq, gt, lt } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import type { Request, Response } from "express";
 import { z } from "zod";
-import { authSessions, type User } from "../../drizzle/schema";
-import * as db from "../db";
-import { COOKIE_NAME } from "../../shared/const";
-import { getSessionCookieOptions } from "../_core/cookies";
+import { authSessions, type User } from "../../drizzle/schema.js";
+import * as db from "../db.js";
+import { COOKIE_NAME } from "../../shared/const.js";
+import { getSessionCookieOptions } from "../_core/cookies.js";
 export type SessionUser = Omit<User, "passwordHash">;
 export function publicUser(user: User): SessionUser {
   const { passwordHash: _hash, ...safe } = user;

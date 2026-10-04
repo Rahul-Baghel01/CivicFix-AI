@@ -1,5 +1,5 @@
-import type { CivicReport } from "../../shared/civic";
-import type { SessionUser } from "./auth";
+import type { CivicReport } from "../../shared/civic.js";
+import type { SessionUser } from "./auth.js";
 
 export function canViewReportEvidence(
   report: CivicReport,

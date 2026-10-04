@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { getSessionCookieOptions } from "./_core/cookies";
+import { getSessionCookieOptions } from "./_core/cookies.js";
 import type { Request } from "express";
 afterEach(() => vi.unstubAllEnvs());
 describe("session cookie options", () => {

@@ -1,1 +1,1 @@
-﻿export * from "./services/storageAdapter";
+﻿export * from "./services/storageAdapter.js";

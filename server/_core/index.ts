@@ -1,9 +1,9 @@
 import "dotenv/config";
 import { createServer } from "node:http";
 import net from "node:net";
-import { createApp, initializeDatabase } from "./app";
-import { validateServerConfig } from "./env";
-import { serveStatic } from "./static";
+import { createApp, initializeDatabase } from "./app.js";
+import { validateServerConfig } from "./env.js";
+import { serveStatic } from "./static.js";
 
 async function findAvailablePort(start: number) {
   for (let port = start; port < start + 20; port++) {
@@ -23,7 +23,7 @@ async function startServer() {
   const app = createApp();
   const server = createServer(app);
   if (config.NODE_ENV === "development") {
-    const { setupVite } = await import("./vite");
+    const { setupVite } = await import("./vite.js");
     await setupVite(app, server);
   } else serveStatic(app);
   const port =

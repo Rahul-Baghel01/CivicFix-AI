@@ -1,39 +1,39 @@
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
-import type { TrpcContext } from "./_core/context";
-import { systemRouter } from "./_core/systemRouter";
+import type { TrpcContext } from "./_core/context.js";
+import { systemRouter } from "./_core/systemRouter.js";
 import {
   adminProcedure,
   protectedProcedure,
   publicProcedure,
   router,
-} from "./_core/trpc";
-import * as civicDb from "./civicDb";
+} from "./_core/trpc.js";
+import * as civicDb from "./civicDb.js";
 import {
   CIVIC_ISSUES,
   DEPARTMENTS,
   PRIORITIES,
   REPORT_STATUSES,
   SEVERITIES,
-} from "../shared/civic";
+} from "../shared/civic.js";
 import {
   analyzeCivicIssue,
   verifyResolution,
-} from "./services/ai/civicIssueAnalyzer";
+} from "./services/ai/civicIssueAnalyzer.js";
 import {
   storageGetSignedUrl,
   storagePut,
   storageCreatePresignedPut,
   storageCreateUploadReceipt,
   storageVerifyUploadReceipt,
-} from "./storage";
-import { storageGet, storageValidate } from "./storage";
-import { decodeImage } from "./services/images";
-import * as auth from "./services/auth";
+} from "./storage.js";
+import { storageGet, storageValidate } from "./storage.js";
+import { decodeImage } from "./services/images.js";
+import * as auth from "./services/auth.js";
 import {
   canViewReportEvidence,
   reportForViewer,
-} from "./services/evidenceAccess";
+} from "./services/evidenceAccess.js";
 
 const dataUrl = z
   .string()

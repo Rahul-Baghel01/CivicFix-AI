@@ -4,7 +4,7 @@ import {
   analysisSchema,
   getFallback,
   verifyResolution,
-} from "./services/ai/civicIssueAnalyzer";
+} from "./services/ai/civicIssueAnalyzer.js";
 afterEach(() => {
   vi.unstubAllEnvs();
   vi.unstubAllGlobals();

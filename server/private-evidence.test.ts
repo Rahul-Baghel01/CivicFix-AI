@@ -11,21 +11,21 @@ import {
 import express from "express";
 import { createServer } from "node:http";
 import type { AddressInfo } from "node:net";
-import { registerStorageRoutes } from "./_core/storageRoutes";
-import { appRouter } from "./routers";
-import type { TrpcContext } from "./_core/context";
-import type { CivicReport } from "../shared/civic";
-import * as civicDb from "./civicDb";
-import { authenticateRequest } from "./services/auth";
-import * as storage from "./storage";
+import { registerStorageRoutes } from "./_core/storageRoutes.js";
+import { appRouter } from "./routers.js";
+import type { TrpcContext } from "./_core/context.js";
+import type { CivicReport } from "../shared/civic.js";
+import * as civicDb from "./civicDb.js";
+import { authenticateRequest } from "./services/auth.js";
+import * as storage from "./storage.js";
 import {
   analyzeCivicIssue,
   getFallback,
   verifyResolution,
-} from "./services/ai/civicIssueAnalyzer";
+} from "./services/ai/civicIssueAnalyzer.js";
 
-vi.mock("./civicDb", async importOriginal => ({
-  ...(await importOriginal<typeof import("./civicDb")>()),
+vi.mock("./civicDb.js", async importOriginal => ({
+  ...(await importOriginal<typeof import("./civicDb.js")>()),
   getReportByEvidenceKey: vi.fn(),
   getReportByPublicId: vi.fn(),
   listReports: vi.fn(),
@@ -34,19 +34,19 @@ vi.mock("./civicDb", async importOriginal => ({
   createReport: vi.fn(),
   resolveReport: vi.fn(),
 }));
-vi.mock("./services/auth", async importOriginal => ({
-  ...(await importOriginal<typeof import("./services/auth")>()),
+vi.mock("./services/auth.js", async importOriginal => ({
+  ...(await importOriginal<typeof import("./services/auth.js")>()),
   authenticateRequest: vi.fn(),
 }));
-vi.mock("./storage", async importOriginal => ({
-  ...(await importOriginal<typeof import("./storage")>()),
+vi.mock("./storage.js", async importOriginal => ({
+  ...(await importOriginal<typeof import("./storage.js")>()),
   storageGetSignedUrl: vi.fn(),
   storageValidate: vi.fn(),
   storagePut: vi.fn(),
 }));
-vi.mock("./services/ai/civicIssueAnalyzer", async importOriginal => ({
+vi.mock("./services/ai/civicIssueAnalyzer.js", async importOriginal => ({
   ...(await importOriginal<
-    typeof import("./services/ai/civicIssueAnalyzer")
+    typeof import("./services/ai/civicIssueAnalyzer.js")
   >()),
   analyzeCivicIssue: vi.fn(),
   verifyResolution: vi.fn(),

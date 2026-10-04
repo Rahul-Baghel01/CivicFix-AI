@@ -2,19 +2,19 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import { SignJWT } from "jose";
-import type { User } from "../drizzle/schema";
-import { appRouter } from "./routers";
+import type { User } from "../drizzle/schema.js";
+import { appRouter } from "./routers.js";
 import {
   authenticateRequest,
   createSession,
   loginSchema,
   registerSchema,
   verifySession,
-} from "./services/auth";
-import * as db from "./db";
-import { COOKIE_NAME } from "../shared/const";
-import type { TrpcContext } from "./_core/context";
-vi.mock("./db", () => ({
+} from "./services/auth.js";
+import * as db from "./db.js";
+import { COOKIE_NAME } from "../shared/const.js";
+import type { TrpcContext } from "./_core/context.js";
+vi.mock("./db.js", () => ({
   getDb: vi.fn(),
   getUserByEmail: vi.fn(),
   getUserById: vi.fn(),

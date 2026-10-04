@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import mysql from "mysql2/promise";
-import { users, type InsertUser, type User } from "../drizzle/schema";
+import { users, type InsertUser, type User } from "../drizzle/schema.js";
 function createDatabase(url: string) {
   return drizzle(mysql.createPool({ uri: url, connectionLimit: 2, waitForConnections: true }));
 }

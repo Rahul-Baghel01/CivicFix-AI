@@ -1,15 +1,15 @@
 import type { Express } from "express";
 import express from "express";
-import { authenticateRequest } from "../services/auth";
+import { authenticateRequest } from "../services/auth.js";
 import {
   normalizeKey,
   storageGetSignedUrl,
   storagePut,
   storagePutPrepared,
   storageValidate,
-} from "../storage";
-import { getReportByEvidenceKey } from "../civicDb";
-import { canViewReportEvidence } from "../services/evidenceAccess";
+} from "../storage.js";
+import { getReportByEvidenceKey } from "../civicDb.js";
+import { canViewReportEvidence } from "../services/evidenceAccess.js";
 export function registerStorageRoutes(app: Express) {
   app.get("/uploads/*", async (req, res) => {
     res.set({

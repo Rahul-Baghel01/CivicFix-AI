@@ -5,8 +5,8 @@ import {
   PRIORITIES,
   SEVERITIES,
   type CivicIssue,
-} from "../../../shared/civic";
-import { requestStructuredVision } from "./provider";
+} from "../../../shared/civic.js";
+import { requestStructuredVision } from "./provider.js";
 
 export const analysisSchema = z
   .object({

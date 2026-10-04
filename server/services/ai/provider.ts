@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { storageImageDataUrl } from "../../storage";
+import { storageImageDataUrl } from "../../storage.js";
 // All provider wire protocol and credentials stay inside this server-only adapter.
 export async function requestStructuredVision<T>(
   schema: z.ZodType<T>,

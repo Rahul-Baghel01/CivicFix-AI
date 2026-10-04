@@ -2,13 +2,13 @@ import express from "express";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { rateLimit } from "express-rate-limit";
 import { sql } from "drizzle-orm";
-import { validateServerConfig } from "./env";
-import { sameOrigin } from "./security";
-import { registerStorageRoutes } from "./storageRoutes";
-import { createContext } from "./context";
-import { getDb } from "../db";
-import { ensureDemoReports } from "../civicDb";
-import { appRouter } from "../routers";
+import { validateServerConfig } from "./env.js";
+import { sameOrigin } from "./security.js";
+import { registerStorageRoutes } from "./storageRoutes.js";
+import { createContext } from "./context.js";
+import { getDb } from "../db.js";
+import { ensureDemoReports } from "../civicDb.js";
+import { appRouter } from "../routers.js";
 
 let databaseReady: Promise<void> | undefined;
 export function initializeDatabase() {

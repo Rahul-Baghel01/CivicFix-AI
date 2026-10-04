@@ -180,3 +180,9 @@ Set the Vercel project Root Directory to the repository root, Framework Preset t
 After deployment, verify owner and admin image access, anonymous/wrong-owner denial, citizen presigned PUT and AI analysis, and authority resolution comparison against the real services. Unit tests and a local production build do not prove live Supabase credentials, CORS, MySQL connectivity or Vercel operation.
 
 See `MIGRATION.md` for the implementation inventory and verification results.
+
+## Backend ESM import convention
+
+Backend relative imports, re-exports and dynamic imports use explicit `.js` specifiers in TypeScript source. TypeScript and `tsx` resolve these to the matching `.ts` sources locally; emitted JavaScript resolves directly in native Node. Backend imports must not use frontend `@/` or `@shared/` aliases. Node requires [explicit extensions for relative ESM imports](https://nodejs.org/api/esm.html#mandatory-file-extensions); TypeScript documents [extension substitution](https://www.typescriptlang.org/docs/handbook/modules/reference#file-extension-substitution).
+
+`pnpm check` includes the separate NodeNext backend configuration in `tsconfig.server.json`, while frontend checking retains bundler resolution. `pnpm test` includes an unbundled native-Node serverless-entrypoint smoke test and a local `tsx`/Vite import check. `pnpm build` emits `dist/index.js` and its optional `dist/vite.js` companion; Vercel continues using the root `index.ts` Express entrypoint. See MIGRATION.md for the complete import audit and changed-file inventory.

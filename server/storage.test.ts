@@ -13,8 +13,8 @@ import {
   storageGet,
   storageCreateUploadReceipt,
   storageVerifyUploadReceipt,
-} from "./storage";
-import { decodeImage, validateImage } from "./services/images";
+} from "./storage.js";
+import { decodeImage, validateImage } from "./services/images.js";
 const png = Buffer.from(
   "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a9ioAAAAASUVORK5CYII=",
   "base64"

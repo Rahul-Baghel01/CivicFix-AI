@@ -1,7 +1,7 @@
 import { and, desc, eq, isNull, or, sql } from "drizzle-orm";
-import { departments, reports, reportAssignments, reportEvents, notifications, type InsertReport, type Report } from "../drizzle/schema";
-import { getDb } from "./db";
-import { DEMO_REPORTS, formatReportId, REPORT_STATUSES, type CivicReport, type ReportStatus, type Severity } from "../shared/civic";
+import { departments, reports, reportAssignments, reportEvents, notifications, type InsertReport, type Report } from "../drizzle/schema.js";
+import { getDb } from "./db.js";
+import { DEMO_REPORTS, formatReportId, REPORT_STATUSES, type CivicReport, type ReportStatus, type Severity } from "../shared/civic.js";
 
 const DEPARTMENT_SEED = [
   ["Roads & Infrastructure", "Repairs roads, footpaths, and municipal transport infrastructure."],

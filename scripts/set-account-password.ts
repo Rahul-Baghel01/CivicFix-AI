@@ -3,9 +3,9 @@ import readline from "node:readline";
 import { Writable } from "node:stream";
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
-import { getDb, getUserByEmail } from "../server/db";
-import { users, authSessions } from "../drizzle/schema";
-import { isBootstrapAdmin } from "../server/services/auth";
+import { getDb, getUserByEmail } from "../server/db.js";
+import { users, authSessions } from "../drizzle/schema.js";
+import { isBootstrapAdmin } from "../server/services/auth.js";
 
 async function run() {
   const email = process.argv[2]?.trim().toLowerCase();

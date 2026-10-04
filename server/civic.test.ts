@@ -4,15 +4,15 @@ import {
   nextStatus,
   REPORT_STATUSES,
   severityRank,
-} from "../shared/civic";
-import { DEMO_REPORTS, type CivicReport } from "../shared/civic";
+} from "../shared/civic.js";
+import { DEMO_REPORTS, type CivicReport } from "../shared/civic.js";
 import {
   analyzeCivicIssue,
   verifyResolution,
-} from "./services/ai/civicIssueAnalyzer";
-import { findPossibleDuplicates } from "./civicDb";
-import { appRouter } from "./routers";
-import type { TrpcContext } from "./_core/context";
+} from "./services/ai/civicIssueAnalyzer.js";
+import { findPossibleDuplicates } from "./civicDb.js";
+import { appRouter } from "./routers.js";
+import type { TrpcContext } from "./_core/context.js";
 
 describe("CivicFix workflow rules", () => {
   it("formats public report identifiers using the required pattern", () => {

@@ -91,3 +91,69 @@ Direct browser presigned PUT uploads remain in place. A scoped one-hour upload r
 Regression coverage includes HTTP GET/HEAD evidence denial, owner/admin redirects, local serving, public-query redaction, receipt tampering/expiry/key binding, analysis/submission authorization, private before/after verification, Supabase signature endpoint/region/headers/checksums, and private Vercel startup. Live Supabase, Vercel and production MySQL validation remain separate deployment checks; no live verification is claimed by these regressions.
 
 Follow-up validation: `pnpm check` passed; `pnpm test` passed **79 tests across 10 files**; `pnpm build` passed and regenerated `public/` and `dist/index.js`. The build retains the existing large-chunk warning. The source diff was reviewed against pre-change snapshots because this workspace has no Git metadata. No live Supabase upload, Vercel deployment or production MySQL verification was performed.
+
+## Vercel native ESM resolution follow-up
+
+The root index.ts already imports ./server/_core/app.js correctly. Its unbundled dependency graph nevertheless preserved 36 extensionless relative imports across 12 importer files, plus the @shared/const runtime alias in server/_core/trpc.ts. The original Vercel graph contains 22 project modules. TypeScript bundler resolution and the local esbuild bundle masked these errors; plain Node requires explicit file extensions and cannot use the frontend alias mapping.
+
+| Importer | Original extensionless runtime specifiers |
+| --- | --- |
+| `server/_core/app.ts` | `./env`, `./security`, `./storageRoutes`, `./context`, `../db`, `../civicDb`, `../routers` |
+| `server/_core/storageRoutes.ts` | `../services/auth`, `../storage`, `../civicDb`, `../services/evidenceAccess` |
+| `server/services/auth.ts` | `../../drizzle/schema`, `../db`, `../../shared/const`, `../_core/cookies` |
+| `server/db.ts` | `../drizzle/schema` |
+| `server/storage.ts` | `./services/storageAdapter` |
+| `server/services/storageAdapter.ts` | `./images` |
+| `server/civicDb.ts` | `../drizzle/schema`, `./db`, `../shared/civic` |
+| `server/_core/context.ts` | `../services/auth` |
+| `server/routers.ts` | `./_core/systemRouter`, `./_core/trpc`, `./civicDb`, `../shared/civic`, `./services/ai/civicIssueAnalyzer`, `./storage`, `./storage`, `./services/images`, `./services/auth`, `./services/evidenceAccess` |
+| `server/_core/systemRouter.ts` | `./trpc` |
+| `server/services/ai/civicIssueAnalyzer.ts` | `../../../shared/civic`, `./provider` |
+| `server/services/ai/provider.ts` | `../../storage` |
+
+The additional runtime alias `@shared/const` is now `../../shared/const.js`. All listed relative specifiers now end in .js. The same convention is applied to backend type imports, re-exports, test/mocking imports, the local dynamic Vite import, its vite.config import, shared exports, Drizzle relations and the account-password operator script. The root entrypoint, application logic, database schema, authentication and storage behavior are unchanged.
+
+The frontend retains its bundler configuration. A separate tsconfig.server.json checks NodeNext resolution without bundler path aliases or TypeScript-extension imports, and pnpm check runs both checks. The local tsx workflow continues to resolve .js specifiers to TypeScript source. The build now emits dist/vite.js alongside dist/index.js, matching the retained optional dynamic import rather than leaving a missing relative target.
+
+Regression tests transpile unbundled JavaScript, audit every emitted static/re-export/dynamic relative import for an explicit existing .js target, load the serverless handler in plain Node without a TS loader, and load the local app/Vite modules through tsx. Tests use dummy environment values and do not connect to MySQL or Supabase. Generated dist imports were inspected, and dist/vite.js loaded successfully in native Node. This verifies local runtime module resolution; actual Vercel packaging/deployment has not been exercised.
+
+Exact changed source/config/documentation files:
+
+- `MIGRATION.md`
+- `README.md`
+- `drizzle/relations.ts`
+- `package.json`
+- `scripts/set-account-password.ts`
+- `server/_core/app.ts`
+- `server/_core/context.ts`
+- `server/_core/index.ts`
+- `server/_core/storageRoutes.ts`
+- `server/_core/systemRouter.ts`
+- `server/_core/trpc.ts`
+- `server/_core/vite.ts`
+- `server/ai.test.ts`
+- `server/auth.logout.test.ts`
+- `server/auth.test.ts`
+- `server/civic.test.ts`
+- `server/civicDb.ts`
+- `server/config.test.ts`
+- `server/cookies.test.ts`
+- `server/db.ts`
+- `server/esm-runtime.test.ts`
+- `server/private-evidence.test.ts`
+- `server/routers.ts`
+- `server/services/ai/civicIssueAnalyzer.ts`
+- `server/services/ai/provider.ts`
+- `server/services/auth.ts`
+- `server/services/evidenceAccess.ts`
+- `server/services/storageAdapter.ts`
+- `server/storage.test.ts`
+- `server/storage.ts`
+- `server/vercel.test.ts`
+- `server/workflow.test.ts`
+- `shared/types.ts`
+- `tsconfig.server.json`
+
+Production build artifacts in public/ and dist/ were regenerated. No push or deployment was performed.
+
+Validation: `pnpm check` passed both frontend/bundler and backend/NodeNext checks; `pnpm test` passed **82 tests across 11 files**; `pnpm build` passed with the existing large-chunk warning. The final emitted audit covered 30 backend/shared/operator/config source modules and 47 relative runtime import occurrences, with zero extensionless specifiers or frontend aliases. Native Node loaded the emitted unbundled Vercel handler and the built Vite companion; tsx loaded the local app and Vite source modules. The final source diff confirms that every existing TypeScript file changed only import specifiers.

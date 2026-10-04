@@ -1,6 +1,6 @@
 import type { CreateExpressContextOptions } from "@trpc/server/adapters/express";
-import type { SessionUser } from "../services/auth";
-import { authenticateRequest } from "../services/auth";
+import type { SessionUser } from "../services/auth.js";
+import { authenticateRequest } from "../services/auth.js";
 export type TrpcContext = {
   req: CreateExpressContextOptions["req"];
   res: CreateExpressContextOptions["res"];

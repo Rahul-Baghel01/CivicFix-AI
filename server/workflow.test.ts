@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { appRouter } from "./routers";
-import * as civicDb from "./civicDb";
-import type { TrpcContext } from "./_core/context";
-vi.mock("./civicDb", async importOriginal => ({
-  ...(await importOriginal<typeof import("./civicDb")>()),
+import { appRouter } from "./routers.js";
+import * as civicDb from "./civicDb.js";
+import type { TrpcContext } from "./_core/context.js";
+vi.mock("./civicDb.js", async importOriginal => ({
+  ...(await importOriginal<typeof import("./civicDb.js")>()),
   createReport: vi.fn(),
   listReports: vi.fn(),
   getReportByPublicId: vi.fn(),

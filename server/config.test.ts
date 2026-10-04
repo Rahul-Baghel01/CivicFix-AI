@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { Request, Response } from "express";
-import { validateServerConfig } from "./_core/env";
-import { sameOrigin } from "./_core/security";
+import { validateServerConfig } from "./_core/env.js";
+import { sameOrigin } from "./_core/security.js";
 afterEach(() => vi.unstubAllEnvs());
 function validConfig() {
   vi.stubEnv("DATABASE_URL", "mysql://user:password@localhost:3306/civicfix");

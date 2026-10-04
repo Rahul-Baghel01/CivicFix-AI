@@ -7,7 +7,7 @@ import {
   GetObjectCommand,
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { validateImage } from "./images";
+import { validateImage } from "./images.js";
 import { SignJWT, jwtVerify } from "jose";
 export function normalizeKey(key: string) {
   if (
