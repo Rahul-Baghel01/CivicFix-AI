@@ -1,0 +1,34 @@
+# Project TODO
+
+- [x] Define the CivicFix AI visual system, public navigation, responsive layout, and landing page with the required hero tagline.
+- [x] Create civic reporting schema for reports, report events, notifications, departments, assignments, and resolution-verification data.
+- [x] Add relational department and assignment records, seed core municipal departments, and preserve assignment history when authorities reroute work.
+- [x] Seed at least 20 clearly labelled demo reports spanning Indian locations, categories, severity levels, and each status in the required workflow.
+- [x] Implement server-side civic issue analysis and resolution-verification service interfaces with strict structured JSON and resilient fallback behavior.
+- [x] Implement authenticated citizen report creation, image validation/upload, geolocation/manual address workflow, editable AI-generated complaint, duplicate detection, and user-safe error handling.
+- [x] Implement citizen dashboard, report list, report tracking timeline, community impact metrics, and in-app read/unread notifications.
+- [x] Build the notification list and mark-read flow, then expand community impact into data-driven citizen metrics.
+- [x] Derive public-impact and resolution-score metrics from persisted report outcomes and create a real notification when a citizen submits a report.
+- [x] Implement protected authority dashboard, queue management, report assignment, priority and status updates, resolution-note requirement, and resolution-image verification.
+- [x] Implement authority map markers, filterable heatmap analytics, and calculated AI insight cards.
+- [x] Implement role-aware access rules and a clearly marked, separate authority demonstration access path.
+- [x] Write unit tests for report ID generation, severity/status constraints, duplicate matching, structured AI fallback, and authority authorization.
+- [x] Verify desktop and mobile interfaces, accessibility, database procedures, image-flow states, map fallbacks, client console, type checks, and test suite.
+- [x] Complete and document a final accessibility and post-fix console verification pass.
+- [x] Save a final project checkpoint and deliver the completed prototype.
+- [x] Polish the end-to-end demo flow so citizens can submit, track, and see resolution updates without dead ends.
+- [x] Elevate the AI-detection and resolution-verification presentation with clear confidence, reasoning, before/after evidence, and uncertainty guidance.
+- [x] Add a needs-attention operations view and improve municipal prioritisation, aging-complaint visibility, and resolution performance signals.
+- [x] Expand analytics with resolution rate, average resolution time, category, severity, status, hotspot, and trend summaries derived from seeded reports.
+- [x] Re-verify citizen and authority demo flows, error states, accessibility, responsive layouts, console output, tests, and production build.
+- [x] Exercise and document the protected citizen-to-authority lifecycle without mutating the curated 20-report demo dataset.
+- [x] Exercise and document AI, map, location, invalid-image, duplicate, unauthorized, empty-state, and uncertain-verification error handling.
+- [x] Verify and document geolocation denial/manual-address fallback, invalid-image rejection, duplicate warning, unauthorized authority access, and AI fallback behavior.
+- [x] Preserve a strong user-supplied issue hint when an image model labels the guided pothole illustration as Other, so the duplicate-warning demo remains meaningful.
+- [x] Save and deliver the final polished demo-ready checkpoint.
+- [x] Inspect and reproduce the invalid OAuth state callback failure without exposing credentials or secrets.
+- [x] Inspect and reproduce the invalid OAuth state callback failure without exposing credentials or secrets.
+- [x] Correct secure OAuth state generation, storage, callback validation, and post-login return handling while preserving administrator authorization.
+- [x] Verify the live authenticated authority workflow and the resulting citizen timeline and notification updates.
+- [x] Replace base64 resolution-evidence transport with a protected binary upload path and re-run the failed resolution verification scenario.
+- [x] Save and deliver the repaired authentication lifecycle checkpoint.

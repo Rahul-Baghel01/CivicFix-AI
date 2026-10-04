@@ -1,0 +1,17 @@
+{
+  "name": "CivicFix AI",
+  "architecture": [
+    "React",
+    "Vite",
+    "Express",
+    "tRPC",
+    "Drizzle",
+    "MySQL"
+  ],
+  "authentication": "Native email and password",
+  "storage": [
+    "local",
+    "S3-compatible"
+  ],
+  "ai": "Configured vision provider"
+}
